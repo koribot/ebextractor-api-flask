@@ -1,0 +1,24 @@
+# Ignore virtual environment
+venv/
+
+# Ignore compiled Python files
+__pycache__/
+*.pyc
+
+# Ignore IDE or editor-specific files
+.vscode/
+.idea/
+
+# Ignore local configuration files
+config.ini
+
+# Ignore sensitive or private information
+secrets.txt
+venv/
+
+ebay_items.csv
+last code working.txt
+Seperated Coding structure last working.txt
+soup.html
+soup.txt
+analyze_search_result copy2.py
