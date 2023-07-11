@@ -41,7 +41,7 @@ def extract_data():
 
         # Rest of your code...
         # Simulate some processing time (replace with your actual processing logic)
-        time.sleep(5)
+        # time.sleep(5)
 
         soup_parse_content = BeautifulSoup(combined_data, "html.parser")
         applied_filters = extract_filters(url)

@@ -36,14 +36,25 @@ def analyze_search_result(listings, applied_filters, exact_url):
 
     # Format the other_word_counts as "Word - Count" and sort by count in descending order
     other_word_counts_formatted = [
-        f"{word}: {word_counts[word]}x" for word in other_words
+        {"Word": word, "Counter": word_counts[word]} for word in other_words
     ]
 
-    other_word_counts_formatted.sort(key=lambda x: int(
-        x.split(':')[1][:-1] or 0), reverse=True)
+    other_word_counts_formatted.sort(key=lambda x: x['Counter'], reverse=True)
+
+    # other_word_counts_formatted = [
+    #     f"{word}: {word_counts[word]}x" for word in other_words
+    # ]
+
+    # other_word_counts_formatted = sorted(other_word_counts_formatted, key=lambda x: float(x.split(':')[1].split(
+    #     '/')[0]) / float(x.split(':')[1].split('/')[1]) if '/' in x.split(':')[1] else 0, reverse=True)
+
+    # other_word_counts_formatted.sort(
+    #     key=lambda x: int(x.split(': ')[1][:-1]), reverse=True)
+
+    # other_word_counts_formatted.sort(key=lambda x: int(
+    #     x.split(':')[1][:-1] or 0), reverse=True)
 
     # Get the prices of the listings
-
     # Define the currency symbols to remove in price range necessary for all ebay sites
     ebay_site_mapping = {
         'www.ebay.com': 'en_US',  # eBay US with USD
@@ -89,14 +100,21 @@ def analyze_search_result(listings, applied_filters, exact_url):
     # Count the occurrence of each price
     prices_counter = Counter(prices)
 
-    # Sort the prices_counter by count in descending order
     sorted_prices_counter = dict(
         sorted(prices_counter.items(), key=lambda x: x[1], reverse=True))
 
-    # Format the sorted_prices_counter as "Price - Count"
     sorted_prices_formatted = [
-        f"{locale.currency(price)}: {count}x" for price, count in sorted_prices_counter.items()
-    ]
+        {"Price": locale.currency(price), "Counter": count} for price, count in sorted_prices_counter.items()]
+
+    # OLD CODE NOT USING ARRAY OF OBJECTS
+    # # Sort the prices_counter by count in descending order
+    # sorted_prices_counter = dict(
+    #     sorted(prices_counter.items(), key=lambda x: x[1], reverse=True))
+
+    # # Format the sorted_prices_counter as "Price - Count"
+    # sorted_prices_formatted = [
+    #     f"{locale.currency(price)}: {count}x" for price, count in sorted_prices_counter.items()
+    # ]
 
     # Find the highest, average, middle, and lowest prices
     if prices:
