@@ -29,17 +29,19 @@ def analyze_search_result(listings, applied_filters, exact_url):
     # Filter the word_counts to include words that occur two or more times
     other_words = [word for word, count in word_counts.items() if count >= 0]
 
+    other_word_counts_formatted = [
+        {"Word": word, "Counter": word_counts[word]} for word in other_words
+    ]
+
+    other_word_counts_formatted.sort(key=lambda x: x['Counter'], reverse=True)
+
+    # OLD CODE NOT USING ARRAY OF OBJECTS
     # Format the keyword_counts as "Keyword - Count"
     # keyword_counts_formatted = [
     #     f"{keyword}: {count}x" for keyword, count in keyword_counts.items()
     # ]
 
     # Format the other_word_counts as "Word - Count" and sort by count in descending order
-    other_word_counts_formatted = [
-        {"Word": word, "Counter": word_counts[word]} for word in other_words
-    ]
-
-    other_word_counts_formatted.sort(key=lambda x: x['Counter'], reverse=True)
 
     # other_word_counts_formatted = [
     #     f"{word}: {word_counts[word]}x" for word in other_words
@@ -51,7 +53,7 @@ def analyze_search_result(listings, applied_filters, exact_url):
     # other_word_counts_formatted.sort(
     #     key=lambda x: int(x.split(': ')[1][:-1]), reverse=True)
 
-    # other_word_counts_formatted.sort(key=lambda x: int(
+    # other_word_counts_formatted.sort(key=lambda x: int( // issue when title is Vitanica Opti-Recovery, Pre & Post Surgery Support 60 VEGAN CAPS EXP:8/24
     #     x.split(':')[1][:-1] or 0), reverse=True)
 
     # Get the prices of the listings
@@ -138,10 +140,10 @@ def analyze_search_result(listings, applied_filters, exact_url):
     return {
         'keyword': keyword,
         'other_word_counts': other_word_counts_formatted,
-        'highest_price': locale.currency(highest_price),
-        'average_price': locale.currency(average_price),
-        'middle_price': locale.currency(middle_price),
-        'lowest_price': locale.currency(lowest_price),
+        'highest_price': locale.currency(highest_price) if highest_price is not None else 0,
+        'average_price': locale.currency(average_price) if average_price is not None else 0,
+        'middle_price': locale.currency(middle_price) if middle_price is not None else 0,
+        'lowest_price': locale.currency(lowest_price) if lowest_price is not None else 0,
         'prices_counter': sorted_prices_formatted,
         # 'free_shipping_count': free_shipping_count,
         # 'store_counts': dict(store_counts)
