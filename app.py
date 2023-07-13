@@ -7,6 +7,7 @@ import time
 from analyze_search_result import analyze_search_result
 from scrape_listings import scrape_listings
 from filters import extract_categories, extract_filters
+from notification import notification
 import requests
 
 
@@ -47,6 +48,7 @@ def extract_data():
         applied_filters = extract_filters(url)
         categories = extract_categories(soup_parse_content)
         listings = scrape_listings(soup_parse_content)
+        notifications = notification()
         # print(listings)
         analysis_result = analyze_search_result(
             listings, applied_filters, exact_url)
@@ -59,7 +61,8 @@ def extract_data():
             'applied_filters': applied_filters,
             'categories': categories,
             'listings': listings,
-            'analysis_result': analysis_result
+            'analysis_result': analysis_result,
+            'notifications': notifications
         }
 
         return jsonify(result), 200
