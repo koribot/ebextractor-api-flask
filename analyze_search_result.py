@@ -8,9 +8,12 @@ import locale
 
 
 def analyze_search_result(listings, applied_filters, exact_url):
-
     # Get the keyword used for search from the query parameters
-    keyword = applied_filters['Keyword Used for Search']
+    if applied_filters:
+        keyword = applied_filters['Keyword Used for Search']
+    else:
+        keyword = ""
+
     # keyword = keyword.lower() if keyword else ''
     # print(keyword)
     # # Count the occurrences of the keyword in each listing title
@@ -21,6 +24,7 @@ def analyze_search_result(listings, applied_filters, exact_url):
 
     # Count the occurrences of other words in the whole listings
     word_counts = Counter()
+
     for listing in listings:
         title = listing['title'].lower()
         words = title.split()  # Split the title into individual words
@@ -130,7 +134,6 @@ def analyze_search_result(listings, applied_filters, exact_url):
         average_price = None
         middle_price = None
         lowest_price = None
-
     # Count the number of listings with free shipping
     # free_shipping_count = sum(listing['free_shipping'] for listing in listings)
 
