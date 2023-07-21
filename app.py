@@ -39,16 +39,17 @@ def extract_data():
 
         # Reconstruct the exact URL
         exact_url = urlunparse((scheme, netloc, path, '', '', ''))
+
         # Rest of your code...
         # Simulate some processing time (replace with your actual processing logic)
         # time.sleep(5)
 
         soup_parse_content = BeautifulSoup(combined_data, "html.parser")
-
         applied_filters = extract_filters(url)
         categories = extract_categories(soup_parse_content)
         listings = scrape_listings(soup_parse_content)
         notifications = notification()
+        # print(listings)
         analysis_result = analyze_search_result(
             listings, applied_filters, exact_url)
 
