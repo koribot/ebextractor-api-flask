@@ -19,7 +19,6 @@ def scrape_listings(soup):
         listing_elements = results_div.select(
             "li.s-item.s-item__dsa-on-bottom, li.s-item.s-item__pl-on-bottom, li.s-item.s-item__before-answer.s-item__pl-on-bottom")
 
-        print(listing_elements)
         listings = []
         if listing_elements:
             for index, listing in enumerate(listing_elements):
@@ -62,5 +61,4 @@ def scrape_listings(soup):
 
     # Sort the listings based on their index to maintain the original order
     listings.sort(key=lambda x: x["index"])
-    print(listings)
     return listings
