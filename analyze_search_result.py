@@ -85,12 +85,11 @@ def analyze_search_result(listings, applied_filters, exact_url):
     # print(currentSite)
     prices = []
     for listing in listings:
-        if (listing['price'].translate(translation_table).replace(
-                '.', '').replace(',', '.').isdigit()):
+        checker = listing['price'].translate(translation_table).replace(
+            '.', '').replace(',', '').replace(' ', '').isdigit()
+        if (checker):
             price = listing['price']
-        # print(listing['price'].translate(translation_table).replace(
-        #     '.', '').replace(',', '.').isdigit())
-        # Remove commas from the price string
+
         if (currentSite == 'www.ebay.it' or currentSite == 'www.ebay.de'):
             price = price.replace('.', '').replace(',', '.')
         else:
