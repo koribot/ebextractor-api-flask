@@ -85,10 +85,22 @@ def analyze_search_result(listings, applied_filters, exact_url):
     # print(currentSite)
     prices = []
     for listing in listings:
+        # remove the Currency symbol, ",", "." in the listing price and check  if its digit - sample $1,265.00, output is 12600.isdigit
         checker = listing['price'].translate(translation_table).replace(
             '.', '').replace(',', '').replace(' ', '').isdigit()
         if (checker):
             price = listing['price']
+        else:
+            # for prices with "to, a, bis"($126to130, EUR126aEUR134) ---- also check if the item has "SEE PRICE(EBAY WILL ONLY SHOW THE PRICE IF YOU CLICK IT)"
+            # check the listing['price'] if it contains letters(including 'to, a, bis'), if true replace with ""
+            #  then check if it still contains numbers if so price=listing['price']
+            tempPrice = listing['price'].translate(translation_table)
+            for char in tempPrice:
+                if char.isalpha():
+                    tempPrice = tempPrice.replace(char, '')
+            if (tempPrice.replace(
+                    '.', '').replace(',', '').replace(' ', '').isdigit()):
+                price = listing['price']
 
         if (currentSite == 'www.ebay.it' or currentSite == 'www.ebay.de'):
             price = price.replace('.', '').replace(',', '.')
