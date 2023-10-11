@@ -53,8 +53,8 @@ def extract_data():
         analysis_result = analyze_search_result(
             listings, applied_filters, exact_url)
 
-        with open('soup.txt', 'w', encoding='utf-8') as file:
-            file.write(str(soup_parse_content.prettify()))
+        # with open('soup.txt', 'w', encoding='utf-8') as file:
+        #     file.write(str(soup_parse_content.prettify()))
 
         result = {
             'exact_url': url,
