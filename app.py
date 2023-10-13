@@ -22,14 +22,11 @@ CORS(app)
 @app.route('/api/extract', methods=['POST'])
 def extract_data():
     try:
-        combined_data = request.json.get('combinedData')
-
-        if not combined_data:
+        htmlContent = request.json.get('htmlContent')
+        url = request.json.get('url')
+        print(htmlContent, url)
+        if not htmlContent and url:
             return jsonify({'error': 'Combined data is missing'}), 400
-
-        # Split the combined data by comma and extract the URL
-        data_parts = combined_data.split(", ")
-        url = data_parts[0]
 
         # Parse the URL to extract its components
         parsed_url = urlparse(url)
@@ -44,7 +41,7 @@ def extract_data():
         # Simulate some processing time (replace with your actual processing logic)
         # time.sleep(5)
 
-        soup_parse_content = BeautifulSoup(combined_data, "html.parser")
+        soup_parse_content = BeautifulSoup(htmlContent, "html.parser")
         applied_filters = extract_filters(url)
         categories = extract_categories(soup_parse_content)
         listings = scrape_listings(soup_parse_content)
