@@ -24,7 +24,7 @@ def extract_data():
     try:
         htmlContent = request.json.get('htmlContent')
         url = request.json.get('url')
-        print(htmlContent, url)
+        # print(htmlContent, url)
         if not htmlContent and url:
             return jsonify({'error': 'Combined data is missing'}), 400
 
