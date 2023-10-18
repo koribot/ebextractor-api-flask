@@ -24,11 +24,17 @@ def analyze_search_result(listings, applied_filters, exact_url):
 
     # Count the occurrences of other words in the whole listings
     word_counts = Counter()
+    invalid_keywords = ['-', '|', ',', '/', '?',
+                        '*', '&', '$', '%']  # Remove invalid keywords
 
     for listing in listings:
         title = listing['title'].lower()
         words = title.split()  # Split the title into individual words
-        word_counts.update(words)
+        valid_keywords = []
+        for word in words:
+            if word not in invalid_keywords:
+                valid_keywords.append(word)
+        word_counts.update(valid_keywords)
 
     # Filter the word_counts to include words that occur two or more times
     other_words = [word for word, count in word_counts.items() if count >= 0]
