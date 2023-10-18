@@ -3,8 +3,10 @@
 Expected type of Request is POST
 ->>you can paste the copied html of ebay search result together with the url, the body should be should be JSON:
 
+
 {
- combinedData: "ebay search url, Strigified outerhtml"
+ htmlContent: "outerhtml",
+ url: "ebay search result url"
 }
 
 You can use this tool to Sringify your HTML: https://jsonformatter.org/json-stringify-online
