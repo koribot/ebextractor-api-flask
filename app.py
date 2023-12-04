@@ -18,6 +18,45 @@ app = Flask(__name__)
 CORS(app)
 
 
+@app.route('/api/extract/using_keyword', methods=['GET'])
+def extract_data_using_keyword_params():
+    try:
+        search_query = request.args.get('q')
+
+        if not search_query:
+            return jsonify({'error': 'You need to provide keyword'}), 400
+
+        url = f"https://www.ebay.com/sch/i.html?_from=R40&_nkw={search_query}&_sacat=0&LH_TitleDesc=0&_fsrp=1&_pgn=2"
+
+        response = requests.get(url)
+        if (response.status_code == 200):
+            htmlContent = response.text
+        soup_parse_content = BeautifulSoup(htmlContent, "html.parser")
+        applied_filters = extract_filters(url)
+        categories = extract_categories(soup_parse_content)
+        listings = scrape_listings(soup_parse_content)
+        notifications = notification()
+        # print(listings)
+        analysis_result = analyze_search_result(
+            listings, applied_filters, url)
+
+        # with open('soup.txt', 'w', encoding='utf-8') as file:
+        #     file.write(str(soup_parse_content.prettify()))
+
+        result = {
+            'exact_url': url,
+            'applied_filters': applied_filters,
+            'categories': categories,
+            'listings': listings,
+            'analysis_result': analysis_result,
+            'notifications': notifications
+        }
+
+        return jsonify(result), 200
+    except Exception as e:
+        return jsonify({'error': str(e)}), 500
+
+
 # Parsing UR
 @app.route('/api/extract', methods=['POST'])
 def extract_data():
