@@ -1,0 +1,12 @@
+{
+  "name": "ebex-api",
+  "version": "1.0.0",
+  "description": "Expected type of Request is POST ->>you can paste the copied html of ebay search result together with the url, the body should be should be JSON:",
+  "main": "app.py",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "flask --app app --debug run"
+  },
+  "author": "walid",
+  "license": "ISC"
+}
