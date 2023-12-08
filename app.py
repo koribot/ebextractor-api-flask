@@ -17,6 +17,18 @@ app = Flask(__name__)
 # })
 CORS(app)
 
+headers = {
+    "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36",
+    "Accept": "text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.7",
+    "Accept-Language": "en-US,en;q=0.9",
+    "Accept-Encoding": "gzip, deflate, br",
+    "Connection": "keep-alive",
+    "Upgrade-Insecure-Requests": "1",
+    "Referer": "https://www.google.com/",
+    "DNT": "1",
+    "Cache-Control": "max-age=0",
+}
+
 
 @app.route('/api/extract/using_keyword', methods=['GET'])
 def extract_data_using_keyword_params():
@@ -26,7 +38,7 @@ def extract_data_using_keyword_params():
             return jsonify({'error': 'You need to provide keyword'}), 400
         url = f"https://www.ebay.com/sch/i.html?_from=R40&_nkw={search_query}&_sacat=0&_ipg=240&_pgn=2"
 
-        response = requests.get(url)
+        response = requests.get(url, headers=headers)
         if (response.status_code == 200):
             htmlContent = response.text
         soup_parse_content = BeautifulSoup(htmlContent, "html.parser")
