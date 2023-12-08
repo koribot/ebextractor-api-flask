@@ -1,8 +1,9 @@
-# ebextractor# ebextractor
+### eBextractor
 
-Expected type of Request is POST
+Expected type of Request is POST for endpoint `/api/extract` and GET for `/api/extract/using_keyword`
+
+
 ->>you can paste the copied html of ebay search result together with the url, the body should be should be JSON:
-
 
 {
  htmlContent: "outerhtml",
@@ -18,7 +19,7 @@ You can use this tool to Sringify your HTML: https://jsonformatter.org/json-stri
 
 ### -> `/api/extract`
 
-Endpoint to receive the outerHTML sent via Post request in the body.
+`Endpoint to receive the outerHTML sent via Post request in the body.`
 
 Usage:
 ```
@@ -32,11 +33,11 @@ Usage:
 }
 ```
 
-
+:sparkles: :sparkles: :sparkles:
 ### -> `/api/extract/using_keyword`
 
-/api/extract/using_keyword
-Endpoint to receive a query sent via the URL.
+`/api/extract/using_keyword`
+`Endpoint to receive a query sent via the URL.`
 
 Usage:
 ```
