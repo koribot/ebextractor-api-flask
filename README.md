@@ -14,33 +14,34 @@ You can use this tool to Sringify your HTML: https://jsonformatter.org/json-stri
 
 
 
-## Endpoints
+# Endpoints
 
 ### `/api/extract`
 
 Endpoint to receive the outerHTML sent via Post request in the body.
 
 Example:
-```plaintext
-/api/extract/
 ```
- {
+/api/extract
+```
+### `Request Body should be like this`
+{
   htmlContent: "Your html in string form"
   url: "ebay search result url"
  }
-```
 
 
-```
+
+### `/api/extract/using_keyword`
+
 /api/extract/using_keyword
-```
 Endpoint to receive a query sent via the URL.
 
 Example:
 ```
 /api/extract/using_keyword?q=shoes
-```
 
+```
 
 
 
