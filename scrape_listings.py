@@ -1,4 +1,5 @@
 from get_item_description import get_item_description
+from utils.item_url_shortener import item_url_shortener
 
 
 def scrape_listings(soup):
@@ -39,7 +40,8 @@ def scrape_listings(soup):
                                     "Opens in a new window or tab", "").replace("New Listing", "")
                             price = price_element.get_text(strip=True)
                             image_url = image_element.get("src")
-                            item_url = link_element.get("href")
+                            item_url = item_url_shortener(
+                                link_element.get("href"))
 
                             # Visit the item's URL and extract the description
                             # description = get_item_description(item_url)
