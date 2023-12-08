@@ -22,11 +22,9 @@ CORS(app)
 def extract_data_using_keyword_params():
     try:
         search_query = request.args.get('q')
-
         if not search_query:
             return jsonify({'error': 'You need to provide keyword'}), 400
-
-        url = f"https://www.ebay.com/sch/i.html?_from=R40&_nkw={search_query}&_sacat=0&LH_TitleDesc=0&_fsrp=1&_pgn=2"
+        url = f"https://www.ebay.com/sch/i.html?_from=R40&_nkw={search_query}&_sacat=0&_ipg=240&_pgn=2"
 
         response = requests.get(url)
         if (response.status_code == 200):
