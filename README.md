@@ -28,7 +28,7 @@ Usage:
 ```json
 {
   "htmlContent": "<html............(this should be in string form)",
-  "url": "https://www.ebay.com/sch/i.html?_from=R40&_trksid=p2334524.m570.l1311&_nkw=rinnai+tankless+water+heater+propane&_sacat=0&LH_TitleDesc=0&_odkw=rinnai&_osacat=0"
+  "url": "https://www.ebay.com/sch/i.html?_from=R40&_trksid=p2334524.m570.l1311&_nkw=shoes&_sacat=0&LH_TitleDesc=0&_odkw=rinnai&_osacat=0"
 }
 ```
 
