@@ -1,5 +1,6 @@
 from get_item_description import get_item_description
 from utils.item_url_shortener import item_url_shortener
+from utils.generate_ebay_img_webp_fromhref import generate_webp
 
 
 def scrape_listings(soup):
@@ -39,7 +40,7 @@ def scrape_listings(soup):
                                 title = title.replace(
                                     "Opens in a new window or tab", "").replace("New Listing", "")
                             price = price_element.get_text(strip=True)
-                            image_url = image_element.get("src")
+                            image_url = generate_webp(link_element.get('href'))
                             item_url = item_url_shortener(
                                 link_element.get("href"))
 
